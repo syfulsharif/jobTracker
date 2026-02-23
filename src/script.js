@@ -81,3 +81,13 @@ let jobs = [
         status: "Available"
     }
 ];
+
+let currentTab = 'all';
+
+// DOM Elements
+const jobsContainer = document.getElementById('jobs-container');
+const emptyState = document.getElementById('empty-state');
+const totalCountEl = document.getElementById('total-count');
+const interviewCountEl = document.getElementById('interview-count');
+const rejectedCountEl = document.getElementById('rejected-count');
+const sectionCountEl = document.getElementById('section-count');
