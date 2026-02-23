@@ -111,7 +111,7 @@ function renderJobs() {
     }
 
     jobsContainer.innerHTML = '';
-    
+
     if (filteredJobs.length === 0) {
         emptyState.classList.remove('hidden');
         emptyState.classList.add('flex');
@@ -124,7 +124,7 @@ function renderJobs() {
         filteredJobs.forEach(job => {
             const card = document.createElement('div');
             card.className = "job-card card bg-white shadow-sm border border-slate-100 p-6 relative";
-            
+
             card.innerHTML = `
                 <button onclick="deleteJob(${job.id})" class="absolute top-4 right-4 text-slate-300 hover:text-rose-500 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,4 +160,34 @@ function updateDashboard() {
     totalCountEl.innerText = jobs.length;
     interviewCountEl.innerText = jobs.filter(job => job.status === 'Interview').length;
     rejectedCountEl.innerText = jobs.filter(job => job.status === 'Rejected').length;
+}
+
+// Function for switching tabs
+
+
+function switchTab(tab) {
+    currentTab = tab;
+    
+    // Update active tab UI
+    document.querySelectorAll('[role="tab"]').forEach(el => el.classList.remove('tab-active'));
+    document.getElementById(`tab-${tab}`).classList.add('tab-active');
+    
+    renderJobs();
+}
+
+// Function for updating stats
+function setStatus(id, newStatus) {
+    const job = jobs.find(j => j.id === id);
+    if (job) {
+        // Toggle if clicking same status? Instructions say "Enable toggle between Interview and rejected button... It will change the tab and dashboard count also"
+        // If it was already Interview and I click Rejected, it changes to Rejected.
+        // If it was Available and I click Interview, it changes to Interview.
+        job.status = (job.status === newStatus) ? 'Available' : newStatus;
+        updateUI();
+    }
+}
+
+function deleteJob(id) {
+    jobs = jobs.filter(job => job.id !== id);
+    updateUI();
 }
