@@ -24,6 +24,31 @@
         <header class="flex justify-between items-center mb-10">
             <h1 class="text-3xl font-bold text-slate-800">Job Application Tracker</h1>
         </header>
+
+        <!-- Stats Dashboard Section-->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Total Card -->
+            <div class="card bg-white shadow-sm border border-slate-100">
+                <div class="card-body p-6 text-center">
+                    <p class="text-sm font-medium text-slate-500 mb-1">Total Jobs</p>
+                    <h2 id="total-count" class="text-4xl font-bold text-slate-800">0</h2>
+                </div>
+            </div>
+            <!-- Interview Card -->
+            <div class="card bg-white shadow-sm border border-slate-100">
+                <div class="card-body p-6 text-center">
+                    <p class="text-sm font-medium text-slate-500 mb-1">Interview</p>
+                    <h2 id="interview-count" class="text-4xl font-bold text-emerald-500">0</h2>
+                </div>
+            </div>
+            <!-- Rejected Card -->
+            <div class="card bg-white shadow-sm border border-slate-100">
+                <div class="card-body p-6 text-center">
+                    <p class="text-sm font-medium text-slate-500 mb-1">Rejected</p>
+                    <h2 id="rejected-count" class="text-4xl font-bold text-rose-500">0</h2>
+                </div>
+            </div>
+        </section>
     </div>
 
 </body>
