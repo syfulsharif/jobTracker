@@ -91,3 +91,73 @@ const totalCountEl = document.getElementById('total-count');
 const interviewCountEl = document.getElementById('interview-count');
 const rejectedCountEl = document.getElementById('rejected-count');
 const sectionCountEl = document.getElementById('section-count');
+
+//  Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    updateUI();
+});
+
+function updateUI() {
+    renderJobs();
+    updateDashboard();
+}
+
+function renderJobs() {
+    let filteredJobs = jobs;
+    if (currentTab === 'interview') {
+        filteredJobs = jobs.filter(job => job.status === 'Interview');
+    } else if (currentTab === 'rejected') {
+        filteredJobs = jobs.filter(job => job.status === 'Rejected');
+    }
+
+    jobsContainer.innerHTML = '';
+    
+    if (filteredJobs.length === 0) {
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+        sectionCountEl.innerText = 0;
+    } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+        sectionCountEl.innerText = filteredJobs.length;
+
+        filteredJobs.forEach(job => {
+            const card = document.createElement('div');
+            card.className = "job-card card bg-white shadow-sm border border-slate-100 p-6 relative";
+            
+            card.innerHTML = `
+                <button onclick="deleteJob(${job.id})" class="absolute top-4 right-4 text-slate-300 hover:text-rose-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                </button>
+                <div class="mb-4">
+                    <h3 class="text-lg font-bold text-slate-800">${job.companyName}</h3>
+                    <p class="text-slate-500 font-medium">${job.position}</p>
+                    <p class="text-xs text-slate-400 mt-1">${job.location} • ${job.type} • ${job.salary}</p>
+                </div>
+                <div class="mb-4">
+                    <span class="inline-block px-2 py-1 text-[10px] font-bold rounded ${job.status === 'Available' ? 'bg-blue-600 text-white' : (job.status === 'Interview' ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white')} uppercase tracking-wider mb-2">
+                        ${job.status === 'Available' ? 'NOT APPLIED' : job.status}
+                    </span>
+                    <p class="text-sm text-slate-500 line-clamp-2">${job.description}</p>
+                </div>
+                <div class="flex gap-3 mt-auto">
+                    <button onclick="setStatus(${job.id}, 'Interview')" class="btn-interview flex-1 py-2 px-4 rounded-lg text-sm font-semibold transition-all ${job.status === 'Interview' ? 'active' : ''}">
+                        INTERVIEW
+                    </button>
+                    <button onclick="setStatus(${job.id}, 'Rejected')" class="btn-rejected flex-1 py-2 px-4 rounded-lg text-sm font-semibold transition-all ${job.status === 'Rejected' ? 'active' : ''}">
+                        REJECTED
+                    </button>
+                </div>
+            `;
+            jobsContainer.appendChild(card);
+        });
+    }
+}
+
+function updateDashboard() {
+    totalCountEl.innerText = jobs.length;
+    interviewCountEl.innerText = jobs.filter(job => job.status === 'Interview').length;
+    rejectedCountEl.innerText = jobs.filter(job => job.status === 'Rejected').length;
+}
