@@ -1,0 +1,62 @@
+/* Custom Styles */
+
+:root {
+    --primary-blue: #3B82F6;
+    --success-green: #10B981;
+    --danger-red: #EF4444;
+}
+
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tab active styles */
+.tab-active {
+    background-color: #3B82F6 !important;
+    color: white !important;
+}
+
+/* Card hover effect */
+.job-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles matching design */
+.btn-interview {
+    border: 1px solid var(--success-green);
+    color: var(--success-green);
+    background: transparent;
+}
+
+.btn-interview:hover {
+    background: var(--success-green);
+    color: white;
+}
+
+.btn-rejected {
+    border: 1px solid var(--danger-red);
+    color: var(--danger-red);
+    background: transparent;
+}
+
+.btn-rejected:hover {
+    background: var(--danger-red);
+    color: white;
+}
+
+.btn-interview.active {
+    background: var(--success-green);
+    color: white;
+}
+
+.btn-rejected.active {
+    background: var(--danger-red);
+    color: white;
+}
