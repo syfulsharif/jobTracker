@@ -49,6 +49,26 @@
                 </div>
             </div>
         </section>
+        <!-- Available Jobs Section -->
+        <section>
+            <h2 class="text-2xl font-bold text-slate-800 mb-6">Available Jobs</h2>
+            <!-- Tab Switching -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+                <!-- Tab Switching (Left) -->
+                <div role="tablist" class="tabs tabs-boxed bg-slate-200 p-1">
+                    <button id="tab-all" role="tab" class="tab tab-active transition-all duration-200"
+                        onclick="switchTab('all')">All</button>
+                    <button id="tab-interview" role="tab" class="tab transition-all duration-200"
+                        onclick="switchTab('interview')">Interview</button>
+                    <button id="tab-rejected" role="tab" class="tab transition-all duration-200"
+                        onclick="switchTab('rejected')">Rejected</button>
+                </div>
+
+                <!-- Job Count (Right) -->
+                <p class="text-sm font-medium text-slate-500"><span id="section-count"
+                        class="text-slate-800 font-bold">0</span> jobs found</p>
+            </div>
+        </section>
     </div>
 
 </body>
